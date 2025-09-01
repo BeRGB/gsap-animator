@@ -1,7 +1,6 @@
 // main.js
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { initRgbSplit } from "./effects/rgbSplitCanvas/index.js";
 import { initAnimations } from "./animator.js";
 import { initLottieData, destroyLottieData } from "./animations/lottieData";
@@ -12,7 +11,7 @@ import { initCubeRevealInstanced } from "./effects/cubeRevealInstanced.js";
 import { initGridDissolveReveal } from "./effects/gridDissolveReveal.js";
 // import { initResponsiveTables } from "./utils/responsiveTables.js";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 try {
   const defs = ScrollTrigger.defaults();
@@ -90,14 +89,31 @@ const boot = async () => {
     console.warn("Font readiness check failed", e);
   }
 
-  const smoother = ScrollSmoother.create({
-    wrapper: "#smooth-wrapper",
-    content: "#smooth-content",
-    smooth: 0,   // 0 = bez smoothinga; 1.0–1.2 za glatko
-    effects: true,
-  });
+  let ScrollSmootherMod = null;
+try {
+  // Try local plugin (if present)
+  ScrollSmootherMod = (await import('gsap/ScrollSmoother')).ScrollSmoother;
+  if (ScrollSmootherMod && (!gsap.core.globals().ScrollSmoother)) {
+    gsap.registerPlugin(ScrollSmootherMod);
+  }
+} catch (_) {
+  try {
+    // Fallback to ESM CDN (trial)
+    const m = await import('https://esm.sh/gsap@3/ScrollSmoother?bundle');
+    ScrollSmootherMod = m.default || m.ScrollSmoother || null;
+    if (ScrollSmootherMod && (!gsap.core.globals().ScrollSmoother)) {
+      gsap.registerPlugin(ScrollSmootherMod);
+    }
+  } catch {}
+}
 
-  // === Nested scroll fix (da .table-scroll radi na iOS/Android) ===
+const smoother = ScrollSmootherMod ? ScrollSmootherMod.create({
+  wrapper: "#smooth-wrapper",
+  content: "#smooth-content",
+  smooth: 0,   // 0 = off; try 1.0–1.2 for smoothing
+  effects: true
+}) : null;
+// === Nested scroll fix (da .table-scroll radi na iOS/Android) ===
   if (smoother && typeof smoother.ignore === "function") {
     smoother.ignore(".table-scroll");
   } else {

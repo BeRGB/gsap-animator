@@ -148,7 +148,7 @@ h2 { font-size: 1.8rem; }
 .merge-left h2{ margin:0 0 .6em 0; line-height:1.1; }
 .merge-right ol{ margin:0; padding:0; }
 
-.merge-left{ background-image:url(/src/img/bg-3.jpg); background-repeat:no-repeat; color:#fff; min-height:800px; padding: 40px 40px 40px 120px;}
+.merge-left{ background-image:url(img/bg-3.jpg); background-repeat:no-repeat; color:#fff; min-height:800px; padding: 40px 40px 40px 120px;}
 .merge-left h1{ font-size:2.4rem; line-height:2.8rem; margin-top:0; margin-bottom:200px; }
 
 @media (max-width:900px){
@@ -282,7 +282,7 @@ h2 { font-size: 1.8rem; }
 }
 
 .list-table-split {
-  background: url("/src/img/bg-4.jpg") no-repeat;
+  background: url("img/bg-4.jpg") no-repeat;
   position: relative;
   background-size: cover;
 }
