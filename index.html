@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GSAP Sections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- ScrollSmoother traži wrapper/content -->
+     <div class="sentinel" style="height:1px"></div>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <!-- Sekcija: ti rasporediš elemente CSS-om, a background radi kao canvas -->
+        <section class="section" style="padding:0;" data-anim-scope>
+          <div class="stage" data-rgb-stage style="min-height: 500px;">
+            <!-- Dovoljno je da staviš data-effect="rgb-split" na canvas ili div -->
+            <canvas
+              data-effect="rgb-split"
+              data-rgb-img="/src/img/bg.jpg"
+              data-rgb-maxw="1400"
+              data-rgb-intensity="0.02"
+              data-rgb-falloff="0.45"
+              data-rgb-noise-freq="3"
+              data-rgb-noise-speed="0.1"
+              data-rgb-smoothing="0.12"
+              data-rgb-dpr="2"
+              data-rgb-channels="rgb"      
+              data-rgb-bg="#0b0b10"
+               data-rgb-minh="560"            
+              data-rgb-fit="cover"            
+              data-rgb-position="bottom right"
+              
+            ></canvas>
+
+            <!-- Tvoj overlay sadržaj, potpuno odvojen od efekta -->
+            <div class="hero-title" data-speed="0.9" data-lag="0.2">
+            
+              <div data-lottie="/src/lottie/rl-logo-white.json"
+                  data-mode="immediate"
+                  data-renderer="svg"
+                  data-loop="false"
+                  data-max="560px"         
+                  data-aspect="16/9"       
+                  data-fit="contain"       
+                  style="position:relative; top:-80px; margin-bottom:-150px;">
+              </div>
+             
+              <div>
+                <h1
+                  class="hero-item"
+                  data-anim="fade"
+                  data-anim-split="lines"
+                  data-anim-y="44"
+                  data-anim-line-tolerance="3"
+                  data-anim-stagger-children="0.15"
+                  data-anim-delay="2.45"
+                  data-anim-trigger=".sentinel"
+                  data-anim-start="top 80%">The CISO Survival Guide to Third-Party Software Risk Management
+                </h1>
+                <p class="hero-item" data-anim="fade" data-anim-delay="3.30">Operationalizing TPSRM with Spectra Assure</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section relative bg-2" data-anim-scope>
+          <!-- sentinel za ceo section (opciono) -->
+        
+
+          <h2 class="title"
+              data-anim="fade"
+              data-anim-y="40"
+              data-anim-duration="1"
+              data-anim-start="top 100%"
+              data-anim-delay="0.45"
+              data-anim-trigger=".sentinel"
+              style="opacity: 0;">
+            Applying Spectra Assure Across the Acquisition Lifecycle 
+          </h2>
+
+          <p class="lead"
+              dclass="title"
+              data-anim="fade"
+              data-anim-y="40"
+              data-anim-duration="1.2"
+              data-anim-delay="0.45"
+              data-anim-start="top 100%"
+              data-anim-trigger=".sentinel"
+              style="opacity: 0;">
+            Spectra Assure addresses a variety of challenges that enterprises face at different stages of their software usage lifecycle including the acquisition, deployment, maintenance, and monitoring of third-party commercial software.
+          </p>
+
+      <!-- TABLE CARD (fade on scroll) -->
+        <div class="table-card light" data-anim-scope data-anim="fade" data-anim-y="28" data-anim-duration="0.8" data-anim-start="top 85%">
+          <div class="table-scroll">
+          <table class="spectra-table">
+            <thead>
+              <tr>
+                <th class="stub"></th>
+
+                <!-- TH: scrambled text; trigerovan ulaskom cele kartice -->
+                <th data-anim="scramble"
+                    data-anim-trigger=".table-card"
+                    data-anim-duration="1.1"
+                    data-anim-ease="power3.out"
+                    data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    data-anim-char-stagger="0.03"
+                    data-anim-jitter="0.25"
+                    data-anim-only-letters="false">
+                  Acquisition
+                </th>
+
+                <th data-anim="scramble"
+                    data-anim-trigger=".table-card"
+                    data-anim-duration="1.1"
+                    data-anim-delay="0.05"
+                    data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    data-anim-char-stagger="0.03"
+                    data-anim-jitter="1.25">
+                  Deployment
+                </th>
+
+                <th data-anim="scramble"
+                    data-anim-trigger=".table-card"
+                    data-anim-duration="1.1"
+                    data-anim-delay="0.1"
+                    data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    data-anim-char-stagger="0.03"
+                    data-anim-jitter="1.25">
+                  Maintenance
+                </th>
+
+                <th data-anim="scramble"
+                    data-anim-trigger=".table-card"
+                    data-anim-duration="1.1"
+                    data-anim-delay="1.15"
+                    data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    data-anim-char-stagger="0.03"
+                    data-anim-jitter="0.25">
+                  Monitoring
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th scope="row" 
+                    class="row-head"
+                    data-anim="scramble"
+                    data-anim-trigger=".table-card"
+                    data-anim-duration="1.1"
+                    data-anim-delay="1.15"
+                    data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    data-anim-char-stagger="0.03"
+                    data-anim-jitter="0.25">
+                    Challenge</th>
+                <td class="cell">Enterprises struggle to gather relevant information to make risk‑based software procurement decisions. Vendors are reluctant to share software composition and risk analysis reports, while existing third‑party software risk reporting fail to provide details the software package itself.</td>
+                <td class="cell">Once a software package is procured, inadequate insight into risks means that the deployment team is unable to implement system and network hardening mechanisms to mitigate enterprise risk.</td>
+                <td class="cell">Enterprise software updates are the primary vector of software supply chain attacks. Enterprises need automated threat analysis on all software updates – even from trusted vendors.</td>
+                <td class="cell">Traditional response plans for supply chain attacks and new zero‑day threats involve active engagement with software vendors…</td>
+              </tr>
+              <tr>
+                <th  scope="row" 
+                    class="row-head"
+                    data-anim="scramble"
+                    data-anim-trigger=".table-card"
+                    data-anim-duration="1.1"
+                    data-anim-delay="1.15"
+                    data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    data-anim-char-stagger="0.03"
+                    data-anim-jitter="0.25">
+                    How Spectra Assure Helps</th>
+                <td class="cell">
+                  <ul class="bullets">
+                    <li>Deconstruct and analyze third‑party packages for threats without source code</li>
+                    <li>Streamlined selection across multiple vendors</li>
+                    <li>Maintained velocity with simplified Go/No‑Go criteria</li>
+                  </ul>
+                </td>
+                <td class="cell">
+                  <ul class="bullets">
+                    <li>SAFE report prioritizes most critical issues</li>
+                    <li>Enable IT Ops/SOC to apply proper controls</li>
+                    <li>Collaborate with vendors via shareable SAFE Reports</li>
+                  </ul>
+                </td>
+                <td class="cell">
+                  <ul class="bullets">
+                    <li>Quickly analyze frequent updates and patches</li>
+                    <li>Stay ahead of posture changes after updates</li>
+                  </ul>
+                </td>
+                <td class="cell">
+                  <ul class="bullets">
+                    <li>Identify software impacted by new vulnerable components</li>
+                    <li>Share SAFE Reports with vendors during incidents</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+       
+        </section>
+
+        <section class="grid-dissolve section"
+          data-rows="30" data-cols="50"
+          data-color="#ffffff"
+          data-radius="2"          
+          data-gap="0"
+          data-duration="0.001"
+          data-stagger="0.001"
+          data-mode="random"       
+          data-start="top 80%" data-end="bottom 50%"
+          data-scrub="false" data-once="true"
+          style="aspect-ratio:16/9; width:min(100%,1400px); margin:0 auto;">
+        <h1 style="font-size: 3rem; margin-bottom: 0px;">Sample Operational Workflow</h1>
+        <h2 style="font-size: 1.8rem; font-weight:400; margin-top:0;">Acquiring, Deploying, Maintaining Software</h2>
+          <!-- TVOJ SADRŽAJ KOJI SE OTKRIVA --> 
+          <img src="/src/img/graph.svg" alt="" style="width:100%; ">
+          <p>With Spectra Assure, third-party risk and cybersecurity teams can ensure rapid response to new zero-day threats by refreshing results for deployed vendor software on-demand and querying the SBOM to quickly assess exposure.</p>
+        </section>
+
+        <section class="grid-dissolve section"
+          data-rows="30" data-cols="50"
+          data-color="#ffffff"
+          data-radius="2"          
+          data-gap="0"
+          data-duration="0.001"
+          data-stagger="0.001"
+          data-mode="diag"       
+          data-start="top 80%" data-end="bottom 50%"
+          data-scrub="false" data-once="true"
+          style="aspect-ratio:16/9; width:min(100%,1400px); margin:0 auto;">
+        <h1 style="font-size: 3rem; margin-bottom: 0px;">Sample Operational Workflow</h1>
+        <h2 style="font-size: 1.8rem; font-weight:400; margin-top:0;">Zero-Day Monitoring and Response</h2>
+          <!-- TVOJ SADRŽAJ KOJI SE OTKRIVA --> 
+          <img src="/src/img/graph-2.svg" alt="" style="width:100%; ">
+          <p>With Spectra Assure, third-party risk and cybersecurity teams can ensure rapid response to new zero-day threats by refreshing results for deployed vendor software on-demand and querying the SBOM to quickly assess exposure.</p>
+        </section>
+
+
+
+        <!-- Sekcija: ti rasporediš elemente CSS-om, a background radi kao canvas -->
+        <section class="section" style="padding: 0;">
+          <div class="stage" data-rgb-stage style="max-height: 400px;">
+            <!-- Dovoljno je da staviš data-effect="rgb-split" na canvas ili div -->
+            <canvas
+              data-effect="rgb-split"
+              data-rgb-img="/src/img/bg-2.jpg"
+              data-rgb-maxw="1400"
+              data-rgb-intensity="0.02"
+              data-rgb-falloff="0.45"
+              data-rgb-noise-freq="3"
+              data-rgb-noise-speed="0.1"
+              data-rgb-smoothing="0.12"
+              data-rgb-dpr="2"
+              data-rgb-channels="rgb"      
+              data-rgb-bg="#0b0b10"
+              data-rgb-minh="260"            
+              data-rgb-fit="cover"            
+              data-rgb-position="bottom center"
+            ></canvas>
+              <div class="sentinel2" style="height:1px" aria-hidden="true"></div>
+            <!-- Tvoj overlay sadržaj, potpuno odvojen od efekta -->
+            <div class="hero-title">
+            
+              <div style="display: grid; place-items: center; text-align: center;">
+              <h1 
+                data-anim="scramble"
+                data-anim-trigger=".sentinel2"
+                data-anim-start="top 100%"
+                data-anim-once="true"
+                data-anim-duration="2.2"
+                data-anim-ease="power3.out"
+                data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                data-anim-char-stagger="0.03"
+                data-anim-jitter="0.25"
+                data-anim-delay="1"
+                data-anim-preserve-whitespace="true"
+                data-anim-only-letters="false">How to Get Started
+              </h1>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="section" data-anim-scope>
+        <!-- Triger može biti sentinel unutar sekcije -->
+        <div class="sentinel" style="height:1vh" aria-hidden="true"></div>
+
+        <h1
+          class="hero-heading"
+          data-anim="scramble"
+          data-anim-trigger=".sentinel"
+          data-anim-start="top 80%"
+          data-anim-once="true"
+          data-anim-duration="1.2"
+          data-anim-ease="power3.out"
+          data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+          data-anim-char-stagger="0.03"
+          data-anim-jitter="0.25"
+          data-anim-preserve-whitespace="true"
+          data-anim-only-letters="false"
+        >
+          Selecting Your Most Critical Applications
+        </h1>
+
+        <p
+          data-anim="scramble"
+          data-anim-trigger=".sentinel"
+          data-anim-start="top 90%"
+          data-anim-duration="1"
+          data-anim-charset="ЯL"
+          data-anim-only-letters="true"
+        >
+          It is recommended that organizations first target the analysis of software that is most critical to the business and expand this to the larger population over time using a risk-based approach. This will enable organizations to quickly uplift the security posture of business-critical software which would have the most financial and operational impact if breached via a supply chain attack.
+        </p>
+      </section>
+
+      <section class="merge-section section" data-slide data-mode="merge">
+      <div class="merge-wrap">
+        <div class="merge-box merge-left"  data-merge-left>
+          <h1>Foundational Steps to Ensure Success</h1>
+          <p>Getting started with Spectra Assure does not require any advanced tuning or configuration. Its AI-driven Complex Binary Analysis does not require access to source code and. Third-party risk and cybersecurity professionals can simply upload the software binary to Spectra Assure to automatically deconstruct and analyze the security posture of their third-party applications.
+          </p>
+        </div>
+
+        <div class="merge-box merge-right" data-merge-right>
+          <div class="merge-steps-wrap">
+            <ol>
+              <li class="merge-step"><div class="step">Step 1</div><div>Start by selecting your most important applications to get a baseline of potential security risks.</div></li>
+              <li class="merge-step"><div class="step">Step 2</div><div>Once known risks are identified, establish compensating controls and environmental hardening by coordinating with the SOC and IT Operations.</div></li>
+              <li class="merge-step"><div class="step">Step 3</div><div>TPRM and Procurement should consult with AppSec and other cyber security SMEs to establish security requirements as a key component of new vendor selections.</div></li>
+              <li class="merge-step"><div class="step">Step 4</div><div>Consult with Procurement and Legal to integrate security requirements into ne vendor contract language to ensure that security fixes are a required stipulation for vendor agreements.</div> </li>
+              <li class="merge-step"><div class="step">Step 5</div><div>Consult with Procurement and Legal to integrate security requirements into ne vendor contract language to ensure that security fixes are a required stipulation for vendor agreements. </div></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section">
+          <div class="section-trig"></div>
+          <h1
+            class="hero-item"
+            data-anim="fade"
+            data-anim-split="lines"
+            data-anim-y="44"
+            data-anim-line-tolerance="3"
+            data-anim-stagger-children="0.15"
+            data-anim-delay="0"
+            data-anim-trigger=".section-trig"
+            data-anim-start="top 80%">The CISO Survival Guide to Third-Party Software Risk Management
+          </h1>
+          <p 
+            data-anim="fade"
+            data-anim-split="lines"
+            data-anim-y="44"
+            data-anim-line-tolerance="3"
+            data-anim-stagger-children="0.15"
+            data-anim-delay=".2"
+            data-anim-trigger=".section-trig"
+          >It is recommended that organizations first target the analysis of software that is most critical to the business and expand this to the larger population over time using a risk-based approach. This will enable organizations to quickly uplift the security posture of business-critical software which would have the most financial and operational impact if breached via a supply chain attack.
+
+          </p>
+
+          <div style="border-radius: 16px; background-color: #f7f7f8; padding:20px; opacity: 0;"
+             data-anim="fade"
+              data-anim-y="40"
+              data-anim-duration="1"
+              data-anim-start="top 100%"
+              data-anim-delay="0.95"
+              data-anim-trigger=".section-trig"
+          >
+            <p>When determining how to segment your software estate based on risk, an organization can consider a variety of risk elements, including but not limited to the following:</p>
+            <div class="grid-responsive">
+            <ul>
+              <li>Criticality of software vendor to business operations (e.g. RTO if software/service becomes unavailable)</li>
+              <li>Breadth of deployment of software (e.g. proportion of systems across IT landscape that use that software)</li>
+              <li>Location that software is deployed or integrated (e.g. deployed at a network boundary or within a restricted network segment)</li>
+            </ul>
+
+            <ul>
+              <li>Connectivity and privilege required for installation (e.g. local admin and connected to “crown-jewel” systems)</li>
+              <li>Level of current and historical investment and maintenance for software (i.e. has software reached end-of-life?)</li>
+            </ul>
+            </div>
+          </div>
+          
+          </div>
+
+             </div>
+
+    </section>
+<div class="list-table-trigger" style="height:1px" aria-hidden="true"></div>
+    <section class="section list-table-split" style="padding-bottom: 40px;">
+            <h1>Priority Software Categories for Security Testing</h1>
+          
+
+            <table class="fancy-table">
+            <tbody>
+              <tr>
+                <td class="left">Finance</td>
+                <td><div data-anim="fade"  data-anim-y="0" data-anim-x="-20" data-anim-duration="1" data-anim-start="top 80%" data-anim-delay="0.45" data-anim-trigger=".list-table-trigger" style="opacity: 0;">Security Controls Package</div></td>
+              </tr>
+              <tr>
+                <td class="left">Email</td>
+                <td><div data-anim="fade" data-anim-y="0" data-anim-x="-20" data-anim-duration="1" data-anim-start="top 80%" data-anim-delay="0.55" data-anim-trigger=".list-table-trigger" style="opacity: 0;">Secure File Transfer Solutions Package</div></td>
+              </tr>
+              <tr>
+                <td class="left">Data Warehouses</td>
+                <td><div data-anim="fade" data-anim-y="0" data-anim-x="-20" data-anim-duration="1" data-anim-start="top 80%" data-anim-delay="0.65" data-anim-trigger=".list-table-trigger" style="opacity: 0;">Critical Operations Solutions Package</div></td>
+              </tr>
+              <tr>
+                <td class="left">ERP</td>
+                <td><div data-anim="fade" data-anim-y="0" data-anim-x="-20" data-anim-duration="1" data-anim-start="top 80%" data-anim-delay="0.75" data-anim-trigger=".list-table-trigger" style="opacity: 0;">Development Solutions Package</div></td>
+              </tr>
+              <tr>
+                <td class="left">Communications</td>
+                <td><div data-anim="fade" data-anim-y="0" data-anim-x="-20" data-anim-duration="1" data-anim-start="top 80%" data-anim-delay="0.85" data-anim-trigger=".list-table-trigger" style="opacity: 0;">Communications Solutions Package</div></td>
+              </tr>
+              <tr>
+                <td class="left">Remote Access Solutions</td>
+                <td><div data-anim="fade" data-anim-y="0" data-anim-x="-20" data-anim-duration="1" data-anim-start="top 80%" data-anim-delay="0.95" data-anim-trigger=".list-table-trigger" style="opacity: 0;">Remote Access Solutions</div></td>
+              </tr>
+            </tbody>
+          </table>
+          
+            
+          </div>
+          
+        </section>
+
+        <section class="section">
+          <div class="section-trig2"></div>
+          <h1
+            class="hero-item"
+            data-anim="fade"
+            data-anim-split="lines"
+            data-anim-y="44"
+            data-anim-line-tolerance="3"
+            data-anim-stagger-children="0.15"
+            data-anim-delay="0"
+            data-anim-trigger=".section-trig2"
+            data-anim-start="top 80%">Selecting Your Most Critical Applications
+          </h1>
+          <p 
+            data-anim="fade"
+            data-anim-split="lines"
+            data-anim-y="44"
+            data-anim-line-tolerance="3"
+            data-anim-stagger-children="0.15"
+            data-anim-delay=".2"
+            data-anim-trigger=".section-trig2"
+          >It is recommended that organizations first target the analysis of software that is most critical to the business and expand this to the larger population over time using a risk-based approach. This will enable organizations to quickly uplift the security posture of business-critical software which would have the most financial and operational impact if breached via a supply chain attack.
+
+          </p>
+
+          <div style="border-radius: 16px; background-color: #f7f7f8; padding:20px; opacity: 0;"
+             data-anim="fade"
+              data-anim-y="40"
+              data-anim-duration="1"
+              data-anim-start="top 100%"
+              data-anim-delay="0.95"
+              data-anim-trigger=".section-trig2"
+          >
+            <div class="grid">
+            <div class="card">
+              <div class="icon">
+                <img src="/src/img/ico-1.svg" alt="Website">
+              </div>
+              <div class="text">
+                <span>Website</span>
+                <h3>Go Beyond the SBOM</h3>
+                <p>Visit our solutions page to learn how the SBOM is not enough to manage third-party software risk.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="icon">
+                <img src="/src/img/ico-2.svg" alt="White Paper">
+              </div>
+              <div class="text">
+                <span>White Paper</span>
+                <h3>Assess and Manage Third-Party Software Risk</h3>
+                <p>Download our white paper to read how Spectra Assure removes the black box surrounding commercial software risk. </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="icon">
+                <img src="/src/img/ico-3.svg" alt="Webinar">
+              </div>
+              <div class="text">
+                <span>Webinar</span>
+                <h3>Don’t Stop at the SBOM</h3>
+                <p>Learn how to take your software supply chain security to the next level whether you’re a software producer or buyer.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="icon">
+                <img src="/src/img/ico-4.svg" alt="Blog">
+              </div>
+              <div class="text">
+                <span>Blog</span>
+                <h3>Why SAFE? Why Now.</h3>
+                <p>RL Chief Trust Officer Saša Zdlelar discusses why the industry is ready for a more comprehensive software security assessment.  </p>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+    </section>
+
+     <section class="section">
+          <div class="section-trig3"></div>
+          <h1
+            class="hero-item"
+            data-anim="fade"
+            data-anim-split="lines"
+            data-anim-y="44"
+            data-anim-line-tolerance="3"
+            data-anim-stagger-children="0.15"
+            data-anim-delay="0"
+            data-anim-trigger=".section-trig3"
+            data-anim-start="top 80%">Selecting Your Most Critical Applications
+          </h1>
+          <p 
+            data-anim="fade"
+            data-anim-split="lines"
+            data-anim-y="44"
+            data-anim-line-tolerance="3"
+            data-anim-stagger-children="0.15"
+            data-anim-delay=".2"
+            data-anim-trigger=".section-trig3"
+          >It is recommended that organizations first target the analysis of software that is most critical to the business and expand this to the larger population over time using a risk-based approach. This will enable organizations to quickly uplift the security posture of business-critical software which would have the most financial and operational impact if breached via a supply chain attack.
+
+          </p>
+
+          <div style="border-radius: 16px; background-color: #f7f7f8; padding:20px; opacity: 0;"
+              data-anim="fade"
+                data-anim-y="40"
+                data-anim-duration="1"
+                data-anim-start="top 100%"
+                data-anim-delay="0.95"
+                data-anim-trigger=".section-trig3"
+            >
+            
+
+              <div class="grid">
+                <div class="card">
+                  
+                  <div class="text">
+                    <h1>Get Started!</h1>
+                    <p>To learn more about ReversingLabs Software Supply Chain Security capabilities and solutions</p>
+                  </div>
+                </div>
+               
+                <div class="card">
+                  
+                  <div class="text " style="text-align: center; margin: 0 auto;">
+                    <a class="cta--gradient" href="https://www.reversinglabs.com/demo">REQUEST A FREE TRIAL</a><br>
+                    reversinglabs.com
+                  </div>
+                </div>
+                </div>
+            </div>
+            <div style="width: 100%; display:flex; flex-direction: column; align-items: center;">
+            <div style="max-width: 800px; margin: auto 0; width: 100%;"
+              
+            >
+              <h1>About ReversingLabs</h1>
+
+              <p>ReversingLabs is the trusted authority in software and file security. We provide the modern cybersecurity platform to verify and deliver safe binaries. Trusted by the Fortune 500 and leading cybersecurity vendors, the ReversingLabs Titanium Platform® powers the software supply chain and file security insights, tracking over 40 billion files daily. Only ReversingLabs provides that final exam to determine whether a single file or full software binary presents a risk to your organization and your customers.</p>
+
+              <p>>ReversingLabs Software Supply Chain Security, powered by AI-driven complex binary analysis, is able to identify compliance issues, exposures, and threats like malware, tampering, vulnerabilities, mitigations, exposed secrets, and license issues – all without the need for source code. Providing the “final build exam,” ReversingLabs provides a comprehensive risk analysis that lets organizations identify, assess, and resolve critical issues, delivering the trust and assurance needed before you ship, deploy, or update your software. </p>
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
+    </section>
+
+    <section style="padding: 40px; margin: 0 auto; text-align: center;"><a href="#" class="cta--gradient">Download Whitepaper PDF</a></section>
+
+  
+
+          <section class="section" style="padding: 0;">
+          <div class="stage10" data-rgb-stage style="max-height: 400px;">
+            <!-- Dovoljno je da staviš data-effect="rgb-split" na canvas ili div -->
+            <canvas
+              data-effect="rgb-split"
+              data-rgb-img="/src/img/bg-2.jpg"
+              data-rgb-maxw="1400"
+              data-rgb-intensity="0.02"
+              data-rgb-falloff="0.45"
+              data-rgb-noise-freq="3"
+              data-rgb-noise-speed="0.1"
+              data-rgb-smoothing="0.12"
+              data-rgb-dpr="2"
+              data-rgb-channels="rgb"      
+              data-rgb-bg="#0b0b10"
+              data-rgb-minh="260"            
+              data-rgb-fit="cover"            
+              data-rgb-position="bottom center"
+            ></canvas>
+              <div class="appendix" style="height:40px" aria-hidden="true"></div>
+            <!-- Tvoj overlay sadržaj, potpuno odvojen od efekta -->
+            <div >
+            
+              <div class="hero-title" style="display: grid; place-items: center; text-align: center; ">
+              <h1 style="opacity: 1;"
+                data-anim="reveal"
+                data-anim-start="top 100%" 
+                data-anim-trigger=".appendix"  
+                data-anim-once="true"
+                data-anim-duration="2.2"
+                data-anim-ease="power3.out"
+                data-anim-charset="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                data-anim-char-stagger="0.03"
+                data-anim-jitter="0.25"
+                data-anim-delay="1">Appendix
+              </h1>
+              </div>
+            </div>
+          </div>
+        </section>
+    <div class="section-trig4" style="height:1px" aria-hidden="true"></div>
+     <section class="section">
+      <h1>Need to Learn More? </h1>
+        <div class="grid2"
+          data-anim="fade"
+          data-anim-y="40"
+          data-anim-duration="1"
+          data-anim-start="top 80%"
+          data-anim-delay="1.10"
+          data-anim-trigger=".section-trig4">
+          <div class="card2">
+            <div class="card2-header">Visit the Site:</div>
+            <img src="/src/img/card-1.jpg" alt="Site preview">
+            <div class="card2-body">
+              <h3>Go Beyond the SBOM</h3>
+            </div>
+          </div>
+
+          <div class="card2"
+          data-anim="fade"
+          data-anim-y="40"
+          data-anim-duration="1"
+          data-anim-start="top 80%"
+          data-anim-delay="1.40"
+          data-anim-trigger=".section-trig4">
+            <div class="card2-header">Watch the Webinar:</div>
+            <img src="/src/img/card-2.jpg" alt="Webinar preview">
+            <div class="card2-body">
+              <h3>Don’t Stop at the SBOM: How to Take Your Software Supply Chain Security to the Next Level</h3>
+            </div>
+          </div>
+
+          <div class="card2"
+          data-anim="fade"
+          data-anim-y="40"
+          data-anim-duration="1"
+          data-anim-start="top 80%"
+          data-anim-delay="1.70"
+          data-anim-trigger=".section-trig4">
+            <div class="card2-header">Download the White Paper:</div>
+            <img src="/src/img/card-3.jpg" alt="White paper preview">
+            <div class="card2-body">
+              <h3>Assess and Manage Third-Party Software Risk</h3>
+            </div>
+          </div>
+
+          <div class="card2"
+          data-anim="fade"
+          data-anim-y="40"
+          data-anim-duration="1"
+          data-anim-start="top 80%"
+          data-anim-delay="2.0"
+          data-anim-trigger=".section-trig4">
+            <div class="card2-header">Read the Blog:</div>
+            <img src="/src/img/card-4.jpg" alt="Blog preview">
+            <div class="card2-body">
+              <h3>Why SAFE? Why Now.</h3>
+            </div>
+          </div>
+        </div>
+
+
+
+     </section>
+     <section style="width: 100%;">
+      <img src="/src/img/footer.svg">
+     </section>
+<style>
+  .reveal-wrap { position: relative; }
+  .reveal-wrap img, .reveal-wrap .content {
+    display:block; width:100%; height:auto;
+  }
+</style>
+
+  <!-- 
+<section >
+  
+<section class="section section--cube-reveal">
+  
+
+<div class="cube-reveal"
+     data-img-src="src/img/graph.svg"
+    data-rows="56" data-cols="100"
+     data-gap="0" data-overlap="0.01" data-padpx="1"
+     data-fit="cover" data-align-x="50" data-align-y="50"
+     data-rotate-axis="y" data-stagger="0.006"
+     data-crisp="true"  
+     data-start="top 80%" data-end="bottom 50%"
+     data-scrub="false" data-once="true"
+     style="aspect-ratio:16/9; width:min(100%,1400px)"></div>
+
+</section>
+
+
+
+
+
+<div class="reveal-wrap" style="position:relative; max-width:1200px; margin:0 auto;">
+  <img id="heroImg" src="/src/img/graph-2.svg" alt=""
+       style="display:block; width:100%; aspect-ratio:21/9; object-fit:cover;" />
+
+
+  <div
+    data-image-mask
+    data-target="#heroImg"
+    data-mask-src="/src/img/mask.png" 
+    data-from="left"
+    data-mask-scale="1.1"
+    data-mask-offset="120%"
+    data-overlay-color="#9a9a9a"
+    data-overlay-opacity="1"
+    data-duration="1.1"
+    data-scrub="0.6"
+    data-once="false">
+  </div>
+</div>
+</section>
+ -->
+<!--
+<section class="section" >
+  <div
+    data-mask-reveal
+    data-mode="css"
+    data-from="right"
+    data-duration="1"
+    data-scrub="0.7"
+    data-once="false"
+    data-mask-src="/src/img/mask.png"  
+    data-mask-scale="1.2"                       
+    data-mask-speed="120%"                      
+    data-img-src="/src/img/graph-2.svg"
+    style="position: relative; width: min(1800px, 95vw); aspect-ratio: 21/9; margin: 0 auto;"
+  ></div>
+</section>-->
+<!--
+<section 
+ data-gradient-mask="true"
+  data-direction="down"
+  data-feather="120"
+  data-start="top 85%"
+  data-end="bottom top"
+  data-curve="center"
+  data-center-plateau="20"
+>
+  <h1>Sample Operational Workflow</h1>
+  <p>Acquiring, Deploying, Maintaining Software</p>
+  <img src="/src/img/graph.svg" >
+  <p>Spectra Assure can be implemented to assess for embedded threats within new vendor deployments, along with new versions and updates for existing deployments. SAFE report can then be shared back with the vendor for expedited remediation.</p>
+</section>
+
+        <section class="sekcija bg-2" data-animation='{"type":"slide","y":80,"duration":1.2,"ease":"power3.out"}'>
+          <h1>Slide up</h1>
+        </section>
+
+        <section class="sekcija bg-3" data-animation="scale" data-from="0.8" data-to="1" data-duration="1">
+          <h1>Scale</h1>
+        </section>
+
+        <section class="sekcija bg-4" data-animation='{"type":"parallax","y":200,"scrub":true,"start":"top bottom","end":"bottom top"}'>
+          <h1>Parallax</h1>
+        </section>
+
+        <section class="sekcija bg-5" data-animation='{"type":"counter","from":0,"to":1234,"duration":1.5,"ease":"none"}'>
+          <h1 class="count">0</h1>
+          <p>Brojač</p>
+        </section>
+
+      </div>
+    </div>-->
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

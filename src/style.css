@@ -1,0 +1,469 @@
+:root {
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+  font-family: "DM Sans", sans-serif;
+}
+
+#smooth-wrapper { height: 100%; overflow: hidden; }
+#smooth-content { will-change: transform; }
+
+.section { max-width: 1400px; width: 100%; margin: auto; padding: 0 20px;}
+.stage   { width: 100%; max-width: 1400px; margin: 0 auto; position: relative; overflow: clip; }
+canvas   { display: block; width: 100%; touch-action: none; }
+
+h1 { font-size: 3rem; }
+
+
+h2 { font-size: 1.8rem; }
+
+.hero-title {
+  position: absolute; inset: 0; z-index: 2;
+  padding: clamp(16px, 3vw, 40px);
+  display: grid;
+}
+.hero-item { word-break: keep-all; overflow-wrap: normal; hyphens: manual; }
+.hero-title h1 {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 96px);
+  width: 70%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #fff;
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,.25));
+}
+.hero-title p {
+  margin: 12px 0 0;
+  font-size: clamp(14px, 2.2vw, 22px);
+  opacity: .9;
+  color: #fff;
+}
+.spacer {
+  min-height: 120vh;
+  display: grid;
+  place-items: center;
+  color: #a4acc4;
+  padding: 8vh 16px;
+}
+[data-anim] { will-change: transform, opacity; }
+
+/* ========== TABLE CARD ========== */
+.table-card.light{
+  border-radius:16px;
+  background:#ffffff;
+  box-shadow:0 10px 40px rgba(0,0,0,.12);
+  overflow:hidden;
+  --min-card-h: 360px;
+  min-height: var(--min-card-h);
+}
+
+/* ========== TABLE BASE ========== */
+.spectra-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  table-layout:fixed;
+  color:#1c1f2a;
+  font-size:16px;
+  background:#fff;
+}
+
+/* HEADER */
+.spectra-table thead{ position:relative; z-index:0; }
+.spectra-table thead::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(to right, #f6143f 0px,  #8A70F5 100%);
+  z-index:-1;
+  border-radius: 16px 16px 0 0;
+}
+.spectra-table thead th{
+  position:relative;
+  background:transparent;
+  color:#fff;
+  font-weight:800;
+  text-align:center;
+  padding:18px 20px;
+  border-right:1px solid rgba(255,255,255,.25);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: 160px;
+}
+.spectra-table thead th:last-child{ border-right:none; }
+.spectra-table thead th.stub{
+  width:220px; text-align:left;
+  border-right:1px solid rgba(255,255,255,.28);
+  min-width:220px;
+}
+
+/* BODY */
+.row-head{
+  width:220px; font-weight:700; padding:18px 20px;
+  background:#f7f8fb;
+  border-right:1px solid rgba(0,0,0,.06);
+  border-top:1px solid rgba(0,0,0,.06);
+  opacity:0;
+  min-width:220px;
+}
+.cell{
+  padding:18px 22px; vertical-align:top; background:#fff;
+  border-right:1px solid rgba(0,0,0,.06);
+  border-top:1px solid rgba(0,0,0,.06);
+  min-width:220px;
+}
+.spectra-table td:last-child{ border-right:none; }
+
+.bullets{ margin:8px 0 0; padding-left:1.2em; }
+.bullets li{ margin:.4em 0; }
+.spectra-table td.cell:hover{ background:#fafbff; transition:background .25s ease; }
+
+/* ========== GRADIENT MASK ========== */
+.gradient-mask {
+  --reveal: 0%; --feather: 80px; --grad-direction: to top;
+  -webkit-mask-image: linear-gradient(var(--grad-direction),#fff 0%,#fff calc(var(--reveal) - var(--feather)),rgba(255,255,255,0.01) var(--reveal),transparent 100%);
+  mask-image: linear-gradient(var(--grad-direction),#fff 0%,#fff calc(var(--reveal) - var(--feather)),rgba(255,255,255,0.01) var(--reveal),transparent 100%);
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-size:100% 100%; mask-size:100% 100%; mask-mode:luminance;
+}
+
+/* ========== MERGE LAYOUT ========== */
+.merge-section{ --gap:0; --pad:clamp(16px, 3vw, 32px); --h:clamp(280px, 42vw, 520px); --dx:12vw; max-width:1400px; margin:0 auto; }
+.merge-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); align-items:center; }
+.merge-box{ background:#fff; min-height:var(--h); position:relative; overflow:hidden; }
+[data-merge-left]{ opacity:0; transform:translateX(calc(-1 * var(--dx))); }
+[data-merge-right]{ opacity:0; transform:translateX(var(--dx)); }
+.merge-steps-wrap{ background:#fff; }
+.merge-step{ opacity:0; transform:translateY(-5px); list-style:none; margin:0 0 10px 0; }
+.step{ background:linear-gradient(to right, #f6143f 0px, #8A70F5 100%); display:inline-block; color:#fff; padding:5px 10px 5px 40px; }
+.step + div{ margin:20px 20px 20px 40px; }
+.merge-left h2{ margin:0 0 .6em 0; line-height:1.1; }
+.merge-right ol{ margin:0; padding:0; }
+
+.merge-left{ background-image:url(/src/img/bg-3.jpg); background-repeat:no-repeat; color:#fff; min-height:800px; padding: 40px 40px 40px 120px;}
+.merge-left h1{ font-size:2.4rem; line-height:2.8rem; margin-top:0; margin-bottom:200px; }
+
+@media (max-width:900px){
+  .merge-wrap{ grid-template-columns:1fr; }
+  .merge-steps-wrap{ width:100%; }
+  .merge-left{ min-height: auto; padding: 20px; }
+  .merge-left h1 { margin-bottom:100px; }
+}
+
+.merge-left p{ font-size:1.4rem; font-weight:bold; }
+
+.section--cube-reveal{ position:relative; }
+.cube-reveal{ display:block; width:min(100%,1200px); margin-inline:auto; }
+.grid-dissolve{ position:relative; }
+.grid-dissolve__overlay{ backface-visibility:hidden; }
+.grid-dissolve__cell{ will-change:opacity; }
+
+/* ========== TABLE SCROLL WRAP ========== */
+.table-scroll{
+  position: relative;
+  display:block;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:visible;
+  -webkit-overflow-scrolling:touch;
+  touch-action:auto;                 /* dozvoli i X i Y gest */
+  overscroll-behavior-x:contain;
+ 
+}
+.table-scroll .spectra-table{
+  width:max(100%, var(--min-table-w,1180px));
+  table-layout:fixed;
+}
+.spectra-table thead th.stub,
+.spectra-table .row-head{ min-width:220px; }
+.spectra-table thead th:not(.stub),
+.spectra-table td.cell{ min-width:220px; }
+
+.table-scroll::-webkit-scrollbar{ height:8px; }
+.table-scroll::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.2); border-radius:4px; }
+.table-scroll::-webkit-scrollbar-track{ background:transparent; }
+
+@media (max-width:600px){
+  .table-card.light{
+    border-radius:12px;
+    box-shadow:0 6px 24px rgba(0,0,0,.08);
+    margin-inline:-12px;
+    --min-card-h:440px;
+  }
+  .table-scroll{ padding-bottom:6px; }
+  .spectra-table th, .spectra-table td{ padding:12px 14px; font-size:14px; }
+  .spectra-table thead th{ min-width:140px; }
+  .spectra-table td.cell{  min-width:180px; }
+  .row-head{ opacity:1; } /* fallback na mobilu */
+}
+/* === FIX: thead gradient vidljiv na mobilu i pri H-scrollu === */
+.spectra-table thead{
+  position: sticky;       /* zadrži traku na vrhu tokom skrola */
+  top: 0;
+  z-index: 5;             /* iznad tbody sadržaja */
+}
+
+.spectra-table thead::before{
+  z-index: 0;             /* više nije -1; ostaje ispod th, ali iznad pozadine */
+  border-radius: 16px 16px 0 0;
+}
+
+.spectra-table thead th{
+  position: relative;
+  z-index: 1;             /* tekst preko gradient trake */
+  background: transparent;
+}
+
+/* Ako imaš neki globalni blur/transform na .table-card koji pravi novi stacking context,
+   osiguraj da i .table-scroll može da prikaže sticky header iznad: */
+.table-scroll{
+  position: relative;
+  z-index: 1;
+}
+
+/* (opciono) suptilan separator ispod sticky headera dok skroluješ */
+.spectra-table thead { box-shadow: 0 1px 0 rgba(0,0,0,.06); }
+
+/* === FIX: gradient na sam thead, bez overlaya koji prekriva tbody === */
+
+/* 1) Ukloni pseudo-element koji je pravio overlay */
+.spectra-table thead::before {
+  content: none !important;
+}
+
+/* 2) Stavi gradient direktno na thead */
+.spectra-table thead {
+  position: sticky;  /* zadrži lep sticky na vrhu */
+  top: 0;
+  z-index: 5;
+  background: linear-gradient(to right, #f6143f 0px, #8A70F5 100%) !important;
+  /* zaobljene ivice (oslanjamo se i na .table-card overflow:hidden) */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  /* mali separator ispod headera pri skrolu */
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+
+/* 3) Ćelije ostaju transparentne preko gradienta */
+.spectra-table thead th {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* 4) Thead da ne “ispada” iza drugih stacking konteksta */
+.table-scroll {
+  position: relative;
+  z-index: 1;
+}
+ 
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr; /* default: sve ispod 768px - kolone */
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.list-table-split {
+  background: url("/src/img/bg-4.jpg") no-repeat;
+  position: relative;
+  background-size: cover;
+}
+
+.list-table-split h1 {
+  position: relative;
+  z-index: 2;
+  width: 50%;
+  padding: 40px;
+  line-height: 1.2;
+  padding: clamp(16px, 3vw, 34px);
+
+}
+
+.list-table-split:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;         /* ako želiš desno stavi right:0 */
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* bela sa prozirnošću */
+  pointer-events: none; /* da ne blokira klikove */
+}
+
+.fancy-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  font-family: sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+/* zajednički stil za sve ćelije */
+.fancy-table td {
+  padding: 16px 20px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.fancy-table tr:last-child td { border-bottom: none; }
+
+/* leva kolona — gradient na SVIM redovima */
+.fancy-table td:first-child {
+  color: #fff;
+  background:linear-gradient(to right, #f6143f -40px, #8A70F5 100%);
+  /* hack: da se gradient rastegne preko cele kolone ravnomerno */
+
+  width: 50%;
+}
+
+/* desna kolona ostaje bela */
+.fancy-table td:last-child {
+  background: #fff;
+  color: #111;
+}
+
+
+.grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr; /* mobil default */
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      background: #f7f7f8;
+      padding: 16px;
+      border-radius: 10px;
+    }
+
+ 
+
+    .text h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .text p {
+      margin: 0;
+      color: #555;
+    }
+
+    .cta--gradient {
+      display: inline-block;
+      background:linear-gradient(to right, #f6143f 0px,  #8A70F5 100%);
+      z-index:-1;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-bottom: 10px; 
+    }
+
+    /* Na tablet i desktop - 2 kolone */
+    @media (min-width: 768px) {
+       
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Na mobilu - vertikalno poravnanje i centar */
+    @media (max-width: 767px) {
+     h1 { 
+        font-size: 2rem;
+      }
+      .card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .icon {
+        margin: 0 0 12px 0;
+      }
+    }
+
+  .icon img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin: 20px;
+  }
+
+  p  {
+    font-size: 18px;
+  }
+
+  .grid2 {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr; /* default: mobile = 1 kolona */
+    }
+
+    .card2 {
+      background: #f5f5f5;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card2-header {
+      background: #1d2a5b;
+      color: #fff;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .card2 img {
+      width: 100%;
+      display: block;
+    }
+
+    .card2-body {
+      padding: 16px;
+    }
+
+    .card2-body h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    /* Tablet - 2 kolone */
+    @media (min-width: 768px) {
+      .grid2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Desktop - 4 kolone */
+    @media (min-width: 1200px) {
+      .grid2 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
