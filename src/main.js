@@ -2,15 +2,15 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { initRgbSplit } from "/src/effects/rgbSplitCanvas/index.js";
-import { initAnimations } from "/src/animator.js";
-import { initLottieData, destroyLottieData } from "/src/animations/lottieData";
-import { initScrollGradientMask } from "/src/effects/scrollGradientMask.js";
-import { initImageMaskReveal } from "/src/animations/maskReveal.js";
-// import { initCubeReveal } from "/src/effects/cubeReveal.js";
-import { initCubeRevealInstanced } from "/src/effects/cubeRevealInstanced.js";
-import { initGridDissolveReveal } from "/src/effects/gridDissolveReveal.js";
-// import { initResponsiveTables } from "/src/utils/responsiveTables.js";
+import { initRgbSplit } from "./effects/rgbSplitCanvas/index.js";
+import { initAnimations } from "./animator.js";
+import { initLottieData, destroyLottieData } from "./animations/lottieData";
+import { initScrollGradientMask } from "./effects/scrollGradientMask.js";
+import { initImageMaskReveal } from "./animations/maskReveal.js";
+// import { initCubeReveal } from "./effects/cubeReveal.js";
+import { initCubeRevealInstanced } from "./effects/cubeRevealInstanced.js";
+import { initGridDissolveReveal } from "./effects/gridDissolveReveal.js";
+// import { initResponsiveTables } from "./utils/responsiveTables.js";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
