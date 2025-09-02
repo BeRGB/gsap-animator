@@ -467,3 +467,15 @@ h2 { font-size: 1.8rem; }
         grid-template-columns: repeat(4, 1fr);
       }
     }
+
+    #app-preloader {
+  position: fixed; inset: 0;
+  background: #0b0b10; color: #fff;
+  display: grid; place-items: top;
+  z-index: 9999; transition: opacity .35s ease;
+}
+#app-preloader.ap-done { opacity: 0; pointer-events: none; }
+#app-preloader .ap-inner { width: 100%; text-align: center; }
+#app-preloader .ap-bar { height: 6px;  border-radius: 999px; overflow: hidden; }
+#app-preloader .ap-fill { display: block; height: 100%; width: 0%; background: #f6143f; transition: width .2s ease; }
+#app-preloader .ap-label { margin-top: 10px; font: 500 12px/1.3 system-ui, sans-serif; letter-spacing: .08em; opacity: .85; }
