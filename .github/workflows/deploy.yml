@@ -30,6 +30,16 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      - name: Copy HTML images used directly in index.html
+        run: |
+          mkdir -p dist/src
+          if [ -d "src/img" ]; then cp -R src/img dist/src/img; fi
+          # .github/workflows/deploy.yml  (posle "npm run build")
+      - name: Copy Lottie JSONs referenced from HTML/data-attrs
+        run: |
+          mkdir -p dist/src/lottie
+          if [ -d "src/lottie" ]; then cp -R src/lottie dist/src/lottie; fi
+
 
   deploy:
     needs: build

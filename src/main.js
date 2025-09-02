@@ -133,7 +133,19 @@ const smoother = ScrollSmootherMod ? ScrollSmootherMod.create({
 
   // ensureTableScrollWrap(); // uključi ako ne obmotaš HTML ručno
 
-  initRgbSplit();
+ function fixRgbImgBase(root = document) {
+  const BASE = (import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : '/';
+  root.querySelectorAll('[data-rgb-img]').forEach(el => {
+    let v = el.getAttribute('data-rgb-img') || '';
+    if (!v || /^https?:\/\//i.test(v)) return;
+    v = v.replace(/^\/+/, '');   // skini leading slash
+    el.setAttribute('data-rgb-img', BASE + v);
+  });
+}
+
+// pozovi PRE efekata koji čitaju atribut
+fixRgbImgBase();
+initRgbSplit();
   // initResponsiveTables(); // nije potrebno u H-scroll varijanti
   initAnimations({ gsap, ScrollTrigger, smoother });
 
