@@ -19,27 +19,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
+
       - run: npm ci
+
+      # Build Vite (ako si u package.json dodao copy skripte, one se ovde već izvršavaju)
       - run: npm run build
-      - name: SPA fallback (optional)
-        run: cp dist/index.html dist/404.html || true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+
+      # (Opcionalno) ako NEMAŠ copy korake u package.json,
+      # zadrži ova dva koraka – ali moraju biti PRE upload-pages-artifact:
       - name: Copy HTML images used directly in index.html
         run: |
           mkdir -p dist/src
           if [ -d "src/img" ]; then cp -R src/img dist/src/img; fi
-          # .github/workflows/deploy.yml  (posle "npm run build")
+
       - name: Copy Lottie JSONs referenced from HTML/data-attrs
         run: |
           mkdir -p dist/src/lottie
           if [ -d "src/lottie" ]; then cp -R src/lottie dist/src/lottie; fi
 
+      # SPA fallback (može i u package.json kao spa:404)
+      - name: SPA fallback (optional)
+        run: cp dist/index.html dist/404.html || true
+
+      # Preporučeno od GitHub-a, pripremi Pages env
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # ⬇⬇⬇  Artefakt MORA biti baš dist/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
   deploy:
     needs: build
@@ -50,4 +64,3 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
-
