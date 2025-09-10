@@ -164,50 +164,107 @@ async function createImmediateJSON(el, opts) {
 async function createScrollJSON(el, opts) {
   await waitForNonZeroSize(el);
   const lottie = await getLottie();
-  const data = await loadAnimationData(opts.path);
+  const data   = await loadAnimationData(opts.path);
 
-  const rendererSettings = {};
-  if (opts.preserve) rendererSettings.preserveAspectRatio = opts.preserve;
+  // Ako korisnik nije definisao visinu/aspect, postavi aspect iz JSON-a
+  if (!el.style.height && !el.style.aspectRatio && !(el.dataset.aspect || el.dataset.ratio)) {
+    if (data.w && data.h) el.style.aspectRatio = `${data.w}/${data.h}`;
+  }
+
+  // --- NOVO: biramo ponašanje "scrub" ili "play" preko data-scroll ---
+  const behavior = (el.dataset.scroll || 'scrub').toLowerCase(); // 'scrub' | 'play'
+  const loopFlag = behavior === 'play' ? toBool(el.dataset.loop, false) : false;
 
   const anim = lottie.loadAnimation({
     container: el,
     renderer: opts.renderer,
-    loop: false,
-    autoplay: false,
+    loop: loopFlag,
+    autoplay: false,              // kontrolu preuzima ScrollTrigger
     animationData: data,
-    rendererSettings,
+    rendererSettings: opts.preserve ? { preserveAspectRatio: opts.preserve } : {}
   });
 
-  anim.addEventListener('data_failed', () => {
-    console.error('[lottie-data] Lottie data_failed for', opts.path);
-  });
+  // helperi za "play" mod
+  const parseSegment = (s) => {
+    if (!s) return null;
+    const m = String(s).split(/[^0-9]+/).filter(Boolean).map(Number);
+    return m.length >= 2 ? [m[0], m[1]] : null;
+  };
 
   anim.addEventListener('DOMLoaded', async () => {
-    finalizeSvgFillAndResize(el, anim);
+    // SVG popuni kontejner
+    const svg = el.querySelector('svg');
+    if (svg) {
+      if (opts.preserve) svg.setAttribute('preserveAspectRatio', opts.preserve);
+      svg.style.width = '100%';
+      svg.style.height = '100%';
+      svg.style.display = 'block';
+      svg.removeAttribute('width');
+      svg.removeAttribute('height');
+    }
 
-    const totalFrames = Math.floor(anim.getDuration(true));
+    // brzina (opc.)
+    if (el.dataset.speed) {
+      const sp = Number(el.dataset.speed);
+      if (!Number.isNaN(sp) && sp > 0) anim.setSpeed(sp);
+    }
+
+    const trigger = opts.trigger || el;
+    const start   = opts.start;
+    const end     = opts.end;
+    const pin     = toBool(el.dataset.pin, false);
+
+    if (behavior === 'play') {
+      const once       = toBool(el.dataset.once, false);
+      const resetBack  = toBool(el.dataset.resetBack, false);
+      const seg        = parseSegment(el.dataset.segment);
+      let st; // referenca na ScrollTrigger da ga ubijemo ako je once
+
+      st = ScrollTrigger.create({
+        trigger,
+        start,
+        end,
+        pin,
+        onEnter: () => {
+          if (seg) anim.playSegments(seg, true);
+          else     anim.play();
+          if (once) {
+            // onemogući dalji uticaj skrola nakon prvog puštanja
+            setTimeout(() => st && st.kill(), 0);
+          }
+        },
+        onEnterBack: () => {
+          if (once) return; // ako je once, više ne diramo
+          if (seg) anim.playSegments(seg, true);
+          else     anim.play();
+        },
+        onLeaveBack: () => {
+          if (resetBack) {
+            anim.stop();
+            anim.goToAndStop(0, true);
+          }
+        }
+      });
+
+      await raf(1);
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    // default: SCRUB mod (postojeće ponašanje)
+    const total = Math.floor(anim.getDuration(true));
     await raf(1);
 
     ScrollTrigger.create({
-      trigger: opts.trigger || el,
-      start: opts.start,
-      end: opts.end,
-      scrub: toNum(opts.scrub, 1),
-      pin: toBool(opts.pin, false),
+      trigger,
+      start,
+      end,
+      scrub: toNum(el.dataset.scrub, 1),
+      pin,
       invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const f = Math.round(self.progress * totalFrames);
-        anim.goToAndStop(f, true);
-      },
-      onLeave: () => anim.goToAndStop(totalFrames, true),
-      onLeaveBack: () => anim.goToAndStop(0, true),
-      onRefresh: () => {
-        const st = ScrollTrigger.getById?.(el) || null;
-        const p = st ? st.progress : null;
-        if (typeof p === 'number') {
-          anim.goToAndStop(Math.round(p * totalFrames), true);
-        }
-      },
+      onUpdate: (self) => anim.goToAndStop(Math.round(self.progress * total), true),
+      onLeave: () =>      anim.goToAndStop(total, true),
+      onLeaveBack: () =>  anim.goToAndStop(0, true),
     });
 
     await raf(1);
@@ -216,6 +273,7 @@ async function createScrollJSON(el, opts) {
 
   return anim;
 }
+
 
 /* ---------------- core: .lottie putevi (web komponenta) ---------------- */
 function createImmediateDotLottie(el, opts) {
