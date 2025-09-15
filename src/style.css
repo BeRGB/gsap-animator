@@ -21,8 +21,24 @@ canvas   { display: block; width: 100%; touch-action: none; }
 
 h1 { font-size: 3rem; }
 
+h2 { font-size: 3rem; margin-bottom: 0px; margin-top: .6em;}
+h3 {font-size: 1.8rem; font-weight:400; margin-top:0; }
 
-h2 { font-size: 1.8rem; }
+.section h2 + p { margin-top: 10px; margin-bottom: 40px;}
+
+
+@media (min-width:900px){
+  
+  .section-2 h2 + p {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width:900px){
+  h2 { 
+    font-size: 2.2rem;
+  }
+}
 
 .hero-title {
   position: absolute; inset: 0; z-index: 2;
@@ -145,11 +161,11 @@ h2 { font-size: 1.8rem; }
 .merge-step{ opacity:0; transform:translateY(-5px); list-style:none; margin:0 0 10px 0; }
 .step{ background:linear-gradient(to right, #f6143f 0px, #8A70F5 100%); display:inline-block; color:#fff; padding:5px 10px 5px 40px; }
 .step + div{ margin:20px 20px 20px 40px; }
-.merge-left h2{ margin:0 0 .6em 0; line-height:1.1; }
+.merge-left h3{ margin:0 0 .6em 0; line-height:1.1; }
 .merge-right ol{ margin:0; padding:0; }
 
 .merge-left{ background-image:url(img/bg-3.jpg); background-repeat:no-repeat; color:#fff; min-height:800px; padding: 40px 40px 40px 120px;}
-.merge-left h1{ font-size:2.4rem; line-height:2.8rem; margin-top:0; margin-bottom:200px; }
+.merge-left h2{ font-size:2.4rem; line-height:2.8rem; margin-top:0; margin-bottom:200px; }
 
 @media (max-width:900px){
   .merge-wrap{ grid-template-columns:1fr; }
@@ -287,7 +303,7 @@ h2 { font-size: 1.8rem; }
   background-size: cover;
 }
 
-.list-table-split h1 {
+.list-table-split h2 {
   position: relative;
   z-index: 2;
   width: 50%;
@@ -381,6 +397,7 @@ h2 { font-size: 1.8rem; }
       padding: 10px 20px;
       font-size: 18px;
       margin-bottom: 10px; 
+      text-wrap: nowrap;
     }
 
     /* Na tablet i desktop - 2 kolone */
@@ -479,3 +496,132 @@ h2 { font-size: 1.8rem; }
 #app-preloader .ap-bar { height: 6px;  border-radius: 999px; overflow: hidden; }
 #app-preloader .ap-fill { display: block; height: 100%; width: 0%; background: #f6143f; transition: width .2s ease; }
 #app-preloader .ap-label { margin-top: 10px; font: 500 12px/1.3 system-ui, sans-serif; letter-spacing: .08em; opacity: .85; }
+
+
+#get-started {
+
+  background: url('/src/img/get-started.jpg') no-repeat;
+  background-size: cover;
+}
+.cta-hero {
+  position: relative;
+  min-height: clamp(420px, 50vw, 500px);
+  display: grid;
+  place-items: center;
+  overflow: clip;
+  color: #fff;
+}
+.get-started-container p {
+  color: inherit;
+  text-align: center;
+  font-size: clamp(1rem, 1.6vw, 1.9rem);
+  font-weight: bold;
+}
+
+.get-started-container h2 {
+  font-size: clamp(2rem, 5.3vw, 7.6rem);
+}
+
+.get-started-container {
+  max-width: 760px;
+  width: 60%;
+  text-align: center;
+}
+
+
+:root{
+  --edge-w: min(18vw, 370px);
+
+  /* Koleno BELE strelice: koliko je udaljeno od ivice (u odnosu na širinu elementa) */
+  --white-knee: calc(100% - 200px);      /* podešavaš po želji */
+
+  /* Koleno GRADIENT strelice = belo koleno povučeno unazad za 20px */
+  --grad-offset: 5px;
+  --grad-knee: calc(var(--white-knee) - var(--grad-offset));
+}
+
+
+
+/* zajedničko */
+.edge{
+  position: absolute;
+  top: 0; bottom: 0;
+  width: var(--edge-w);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* ===== LEVA STRANA (pokazuje udesno) ===== */
+
+/* GRADIENT – ispred (z-index veći) i povučen unazad za 20px */
+.edge--left.edge--grad{
+  left: -45px; z-index: 3;
+  clip-path: polygon(
+    0 0,
+    var(--grad-knee) 0,
+    100% 50%,
+    var(--grad-knee) 100%,
+    0 100%
+  );
+  background: linear-gradient(180deg, #ff2f7d 0%, #7a3bff 100%);
+}
+
+/* BELA – iza (šire koleno) */
+.edge--left.edge--white{
+  left: 0; z-index: 2;
+  clip-path: polygon(
+    0 0,
+    var(--white-knee) 0,
+    100% 50%,
+    var(--white-knee) 100%,
+    0 100%
+  );
+  background: #fff;
+  filter: drop-shadow(0 0 12px rgba(0,0,0,.12));
+}
+
+/* ===== DESNA STRANA (ogledalo) ===== */
+
+.edge--right.edge--grad{
+  right: -50px; z-index: 3;
+  clip-path: polygon(
+    100% 0,
+    calc(100% - var(--grad-knee)) 0,
+    0 50%,
+    calc(100% - var(--grad-knee)) 100%,
+    100% 100%
+  );
+  background: linear-gradient(180deg, #ff2f7d 0%, #7a3bff 100%);
+}
+
+.edge--right.edge--white{
+  right: 0; z-index: 2;
+  clip-path: polygon(
+    100% 0,
+    calc(100% - var(--white-knee)) 0,
+    0 50%,
+    calc(100% - var(--white-knee)) 100%,
+    100% 100%
+  );
+  background: #fff;
+  filter: drop-shadow(0 0 12px rgba(0,0,0,.12));
+}
+
+
+@media (max-width: 900px){
+  
+  :root{
+  --edge-w: min(16vw, 370px);
+    --white-knee: calc(100% - 250px); 
+  --grad-offset: 1px;
+  --grad-knee: calc(var(--white-knee) - var(--grad-offset));
+  }
+
+  .edge--right.edge--grad{
+    right: -20px;
+  }
+  .edge--left.edge--grad{
+    left: -20px;
+  }
+
+}
